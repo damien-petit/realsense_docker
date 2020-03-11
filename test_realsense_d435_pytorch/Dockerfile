@@ -13,7 +13,7 @@ RUN apt-get update && \
 
 # glxgears
 RUN apt-get -y update && \
-    apt-get -y install mesa-utils libglu1-mesa libvtk5-dev # mayavi2
+    apt-get -y install mesa-utils libglu1-mesa
 
 # nvidia-docker hooks
 LABEL com.nvidia.volumes.needed="nvidia_driver"
@@ -22,10 +22,10 @@ ENV LD_LIBRARY_PATH /usr/local/nvidia/lib:/usr/local/nvidia/lib64:${LD_LIBRARY_P
 
 # Install Nvidia cuDNN library missing from parent image.
 # https://gitlab.com/nvidia/cuda/blob/ubuntu16.04/9.0/devel/cudnn7/Dockerfile
-RUN apt-get update && apt-get install -y --no-install-recommends \
-        libcudnn7=7.1.3.16-1+cuda9.0 \
-        libcudnn7-dev=7.1.3.16-1+cuda9.0 \
-        && rm -rf /var/lib/apt/lists/*
+#RUN apt-get update && apt-get install -y --no-install-recommends \
+#        libcudnn7=7.1.3.16-1+cuda9.0 \
+#        libcudnn7-dev=7.1.3.16-1+cuda9.0 \
+#        && rm -rf /var/lib/apt/lists/*
 
 
 ################################################################################
@@ -51,7 +51,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 
 # Python2
-RUN apt-get update && apt-get -y install build-essential python-dev python-pip python-vtk
+RUN apt-get update && apt-get -y install build-essential python-dev python-pip
 RUN pip install --upgrade pip setuptools wheel
 RUN pip install numpy
 #RUN apt-get -y install python-numpy python-scipy python-matplotlib ipython ipython-notebook python-pandas python-sympy python-nose
